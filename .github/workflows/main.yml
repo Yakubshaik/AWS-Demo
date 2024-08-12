@@ -1,5 +1,5 @@
 name: ecr_docker_deployment
-on: [push]
+# on: [push]
 jobs:
   docker_cicd:
     runs-on: ubuntu-latest
