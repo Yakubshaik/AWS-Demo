@@ -1,6 +1,7 @@
 import sys
 import os
 import requests
+import json
 
 azure_credentials = os.getenv('AZURE_CREDENTIALS')
 
