@@ -2,10 +2,16 @@ import sys
 import os
 import requests
 
-# Replace these with your Azure AD application details
-CLIENT_ID = os.getenviron.get('AZURE_CLIENT_ID')
-CLIENT_SECRET = os.getenviron.get('AZURE_CLIENT_SECRET')
-TENANT_ID = os.getenviron.get('AZURE_TENANT_ID')
+azure_credentials = os.getenv('AZURE_CREDENTIALS')
+
+credentials = json.loads(azure_credentials)
+
+# Extract individual fields from the JSON
+CLIENT_ID = credentials['clientId']
+CLIENT_SECRET = credentials['clientSecret']
+TENANT_ID = credentials['tenantId']
+
+
 
 def get_access_token(client_id, client_secret, tenant_id):
     auth_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize"
