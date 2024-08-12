@@ -6,6 +6,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Configure Azure credentials
+        env:
+          Client_Id  : ${{ secrets.AZURE_CLIENT_ID }}
+          Client_Secret: ${{ secrets.AZURE_CLIENT_SECRET }}
+          Tenant_Id : ${{ secrets.AZURE_TENANT_ID }}
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -21,9 +26,7 @@ jobs:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: sample_repo
           IMAGE_TAG: ${{ github.sha }}
-          Client_Id  : ${{ secrets.AZURE_CLIENT_ID }}
-          Client_Secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          Tenant_Id : ${{ secrets.AZURE_TENANT_ID }}
+          
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
