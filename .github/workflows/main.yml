@@ -17,18 +17,19 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
-      - name: Configure Azure Credentials
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+      # - name: Configure Azure Credentials
+      #   env:
+      #     AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
           
-        run:
-          echo "Azure credentials are set up."
-          echo $AZURE_CREDENTIALS > azure_credentials.json
+      #   run:
+      #     echo "Azure credentials are set up."
+      #     echo $AZURE_CREDENTIALS > azure_credentials.json
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
           REPOSITORY: sample_repo
           IMAGE_TAG: ${{ github.sha }}
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
           
         run: |
           docker build -t $REGISTRY/$REPOSITORY:$IMAGE_TAG .
@@ -36,4 +37,5 @@ jobs:
           aws lambda update-function-code \
             --function-name github_docker_demo \
             --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+          echo $AZURE_CREDENTIALS > azure_credentials.json
       
