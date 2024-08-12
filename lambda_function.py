@@ -4,7 +4,7 @@ import requests
 
 # Replace these with your Azure AD application details
 CLIENT_ID = ${{secrets.AZURE_CLIENT_ID}}
-CLIENT_SECRET = '${{secrets.AZURE_CLIENT_SECRET}}
+CLIENT_SECRET = ${{secrets.AZURE_CLIENT_SECRET}}
 TENANT_ID = ${{secrets.AZURE_TENANT_ID}}
 
 def get_access_token(client_id, client_secret, tenant_id):
