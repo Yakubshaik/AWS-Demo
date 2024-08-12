@@ -7,14 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configure Azure Credentials
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-          
-        run:
-          echo "Azure credentials are set up."
-          echo $AZURE_CREDENTIALS > azure_credentials.json
-          
+           
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -37,3 +30,10 @@ jobs:
           aws lambda update-function-code \
             --function-name github_docker_demo \
             --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+      - name: Configure Azure Credentials
+        env:
+          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+          
+        run:
+          echo "Azure credentials are set up."
+          echo $AZURE_CREDENTIALS > azure_credentials.json
