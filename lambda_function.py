@@ -45,7 +45,7 @@ def list_users(access_token):
 def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
     try:
-        azure_credentials = os.getenv('AZURE_CREDENTIALS')
+        azure_credentials = os.getenv('Azure_credentials')
 
         credentials = json.loads(azure_credentials)
 
