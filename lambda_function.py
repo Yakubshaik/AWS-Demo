@@ -3,7 +3,11 @@ import os
 import requests
 import json
 
-azure_credentials = os.getenv('AZURE_CREDENTIALS')
+with open('azure_credentials.json', 'r') as file:
+        azure_credentials = file.read()
+        credentials = json.loads(azure_credentials)
+
+# azure_credentials = os.getenv('AZURE_CREDENTIALS')
 
 credentials = json.loads(azure_credentials)
 
