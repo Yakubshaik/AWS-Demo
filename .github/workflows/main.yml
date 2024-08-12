@@ -1,17 +1,12 @@
 # ECR deployment next.
 name: ecr_docker_deployment
-on: [push]
+on: 
+  workflow_dispatch: 
 jobs:
   docker_cicd:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Configure Azure credentials
-        uses: Azure/login@v1
-        with: 
-          Client_Id  : ${{ secrets.AZURE_CLIENT_ID }}
-          Client_Secret: ${{ secrets.AZURE_CLIENT_SECRET }}
-          Tenant_Id : ${{ secrets.AZURE_TENANT_ID }}
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
