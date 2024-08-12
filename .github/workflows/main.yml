@@ -1,4 +1,4 @@
-# ECR deployment.
+# ECR deployment next.
 name: ecr_docker_deployment
 on: [push]
 jobs:
