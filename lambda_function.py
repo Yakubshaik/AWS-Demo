@@ -48,13 +48,13 @@ def list_users(access_token):
 
 def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
-     try:
-    token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
-    print("Successfully obtained access token.")
-    print(token)
-    users = list_users(token)
-    print("Successfully connected to Microsoft Graph API. Here are the first 10 users:")
-    for user in users['value'][:10]:
-        print(f"User: {user['displayName']}, Email: {user['mail']}")
+    try:
+        token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
+        print("Successfully obtained access token.")
+        print(token)
+        users = list_users(token)
+        print("Successfully connected to Microsoft Graph API. Here are the first 10 users:")
+        for user in users['value'][:10]:
+            print(f"User: {user['displayName']}, Email: {user['mail']}")
     except Exception as e:
         print(f"An error occurred: {e}")
