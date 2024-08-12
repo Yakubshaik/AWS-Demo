@@ -12,7 +12,7 @@ jobs:
           Azure_credentials : ${{ secrets.AZURE_CREDENTIALS }}
         run:
           echo "Azure credentials are set up."
-          echo $AZURE_CREDENTIALS > azure_credentials.jso
+          echo $AZURE_CREDENTIALS > azure_credentials.json
           
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v1
