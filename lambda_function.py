@@ -3,21 +3,6 @@ import os
 import requests
 import json
 
-with open('azure_credentials.json', 'r') as file:
-        azure_credentials = file.read()
-        credentials = json.loads(azure_credentials)
-
-# azure_credentials = os.getenv('AZURE_CREDENTIALS')
-
-credentials = json.loads(azure_credentials)
-
-# Extract individual fields from the JSON
-CLIENT_ID = credentials['clientId']
-CLIENT_SECRET = credentials['clientSecret']
-TENANT_ID = credentials['tenantId']
-
-
-
 def get_access_token(client_id, client_secret, tenant_id):
     auth_url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/authorize"
     url = f"https://login.microsoftonline.com/{tenant_id}/oauth2/v2.0/token"
@@ -60,9 +45,17 @@ def list_users(access_token):
 def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
     try:
+        azure_credentials = os.getenv('AZURE_CREDENTIALS')
+
+        credentials = json.loads(azure_credentials)
+
+# Extract individual fields from the JSON
+        CLIENT_ID = credentials['clientId']
+        CLIENT_SECRET = credentials['clientSecret']
+        TENANT_ID = credentials['tenantId']
         token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
-        print("Successfully obtained access token.")
-        print(token)
+        # print("Successfully obtained access token.")
+        # print(token)
         users = list_users(token)
         print("Successfully connected to Microsoft Graph API. Here are the first 10 users:")
         for user in users['value'][:10]:
