@@ -45,16 +45,20 @@ def list_users(access_token):
 def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
     try:
-        azure_credentials = os.getenv('AZURE_CREDENTIALS')
-        print(azure_credentials)
+        # azure_credentials = os.getenv('AZURE_CREDENTIALS')
+        # print(azure_credentials)
 
-        credentials = json.loads(azure_credentials)
-        print(credentials)
+        # credentials = json.loads(azure_credentials)
+        # print(credentials)
+        TENANT_ID = os.getenv('AZURE_TENANT_ID')
+        CLIENT_ID = os.getenv('AZURE_CLIENT_ID')
+        CLIENT_SECRET = os.getenv('AZURE_CLIENT_SECRET')
+        print("tenant id ",TENANT_ID)
 
-        # Extract individual fields from the JSON
-        CLIENT_ID = credentials.get('clientId')
-        CLIENT_SECRET = credentials.get('clientSecret')
-        TENANT_ID = credentials.get('tenantId')
+        # # Extract individual fields from the JSON
+        # CLIENT_ID = credentials.get('clientId')
+        # CLIENT_SECRET = credentials.get('clientSecret')
+        # TENANT_ID = credentials.get('tenantId')
         token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
         # print("Successfully obtained access token.")
         # print(token)
