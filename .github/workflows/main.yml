@@ -40,6 +40,13 @@ jobs:
           echo ${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}
           echo ${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}
 
+      - name: Set up Azure Credentials for Python Script
+        run: |
+          echo "AZURE_TENANT_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}" >> $GITHUB_ENV
+          echo "AZURE_CLIENT_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}" >> $GITHUB_ENV
+          echo "AZURE_CLIENT_SECRET=${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}" >> $GITHUB_ENV
+
+
 
       - name: Build, tag, and push docker image to Amazon ECR
         env:
