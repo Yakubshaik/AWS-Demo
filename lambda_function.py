@@ -46,8 +46,10 @@ def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
     try:
         azure_credentials = os.getenv('AZURE_CREDENTIALS')
+        print(azure_credentials)
 
         credentials = json.loads(azure_credentials)
+        print(credentials)
 
         # Extract individual fields from the JSON
         CLIENT_ID = credentials.get('clientId')
