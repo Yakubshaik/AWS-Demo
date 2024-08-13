@@ -29,8 +29,8 @@ jobs:
         # run:
         #   echo "Azure credentials are set up."
         #   echo $AZURE_CREDENTIALS > azure_credentials.json
-      - name: Print Azure Credentials (Caution:For Debugging Only)
-        run: echo ${{ secrets.AZURE_CREDENTIALS }}
+      # - name: Print Azure Credentials (Caution:For Debugging Only)
+      #   run: echo ${{ secrets.AZURE_CREDENTIALS }}
 
       - name: Print Tenant ID (Caution:For Debugging Only)
         run: echo ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
