@@ -46,6 +46,10 @@ jobs:
           echo "AZURE_CLIENT_ID=${{ fromJson(secrets.AZURE_CREDENTIALS).clientId }}" >> $GITHUB_ENV
           echo "AZURE_CLIENT_SECRET=${{ fromJson(secrets.AZURE_CREDENTIALS).clientSecret }}" >> $GITHUB_ENV
 
+      - name: Write Azure Credentials to File
+        run: echo "${{ secrets.AZURE_CREDENTIALS }}" > azure_credentials.json
+
+
 
 
       - name: Build, tag, and push docker image to Amazon ECR
