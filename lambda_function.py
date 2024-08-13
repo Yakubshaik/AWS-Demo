@@ -42,25 +42,46 @@ def list_users(access_token):
 # print(token)
 
 
+import boto3
+import json
+
+def get_parameter():
+    parameter_name = "/my/azure/credentials"
+    region_name = "ap-southeast-2"
+
+    # Create an SSM client
+    client = boto3.client('ssm', region_name=region_name)
+
+    # Retrieve the parameter value
+    response = client.get_parameter(Name=parameter_name, WithDecryption=True)
+    
+    # Parse the parameter value as JSON
+    parameter = json.loads(response['Parameter']['Value'])
+    
+    return parameter
+
+
+    # Use these credentials as needed
+
+
+
 def handler(event, context):
     # return 'Hello from AWS Lambda using Python' + sys.version + '!'
     try:
-        # azure_credentials = os.getenv('AZURE_CREDENTIALS')
-        # print(azure_credentials)
+        # # azure_credentials = os.getenv('AZURE_CREDENTIALS')
+        # # print(azure_credentials)
 
-        # credentials = json.loads(azure_credentials)
-        # print(credentials)
-        with open('azure_credentials.json') as f:
-            credentials = json.load(f)
+        # # credentials = json.loads(azure_credentials)
+        # # print(credentials)
+        # with open('azure_credentials.json') as f:
+        #     credentials = json.load(f)
+        credentials = get_parameter()
 
         TENANT_ID = credentials['tenantId']
         CLIENT_ID = credentials['clientId']
         CLIENT_SECRET = credentials['clientSecret']
             
 
-        # TENANT_ID = os.getenv('AZURE_TENANT_ID')
-        # CLIENT_ID = os.getenv('AZURE_CLIENT_ID')
-        # CLIENT_SECRET = os.getenv('AZURE_CLIENT_SECRET')
         print("tenant id ",TENANT_ID)
 
         # # Extract individual fields from the JSON
