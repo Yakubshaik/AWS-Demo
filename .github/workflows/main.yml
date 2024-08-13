@@ -31,6 +31,10 @@ jobs:
       - name: Print Azure Credentials (Caution:For Debugging Only)
         run: echo ${{ secrets.AZURE_CREDENTIALS }}
 
+      - name: Print Tenant ID (Caution:For Debugging Only)
+        run: echo ${{ fromJson(secrets.AZURE_CREDENTIALS).tenantId }}
+
+
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
