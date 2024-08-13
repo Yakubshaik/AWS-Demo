@@ -50,9 +50,9 @@ def handler(event, context):
         credentials = json.loads(azure_credentials)
 
         # Extract individual fields from the JSON
-        CLIENT_ID = credentials["clientId"]
-        CLIENT_SECRET = credentials["clientSecret"]
-        TENANT_ID = credentials["tenantId"]
+        CLIENT_ID = credentials.get('clientId')
+        CLIENT_SECRET = credentials.get('clientSecret')
+        TENANT_ID = credentials.get('tenantId')
         token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
         # print("Successfully obtained access token.")
         # print(token)
