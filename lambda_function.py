@@ -50,9 +50,17 @@ def handler(event, context):
 
         # credentials = json.loads(azure_credentials)
         # print(credentials)
-        TENANT_ID = os.getenv('AZURE_TENANT_ID')
-        CLIENT_ID = os.getenv('AZURE_CLIENT_ID')
-        CLIENT_SECRET = os.getenv('AZURE_CLIENT_SECRET')
+        with open('azure_credentials.json') as f:
+            credentials = json.load(f)
+
+        TENANT_ID = credentials['tenantId']
+        CLIENT_ID = credentials['clientId']
+        CLIENT_SECRET = credentials['clientSecret']
+            
+
+        # TENANT_ID = os.getenv('AZURE_TENANT_ID')
+        # CLIENT_ID = os.getenv('AZURE_CLIENT_ID')
+        # CLIENT_SECRET = os.getenv('AZURE_CLIENT_SECRET')
         print("tenant id ",TENANT_ID)
 
         # # Extract individual fields from the JSON
