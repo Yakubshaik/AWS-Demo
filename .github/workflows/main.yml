@@ -18,12 +18,19 @@ jobs:
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@v2
       - name: Configure Azure Credentials
-        env:
-          AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
-          
-        run:
-          echo "Azure credentials are set up."
-          echo $AZURE_CREDENTIALS > azure_credentials.json
+        # env:
+        #   AZURE_CREDENTIALS: ${{ secrets.AZURE_CREDENTIALS }}
+        
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+        # run:
+        #   echo "Azure credentials are set up."
+        #   echo $AZURE_CREDENTIALS > azure_credentials.json
+      - name: Print Azure Credentials (Caution:For Debugging Only)
+        run: echo ${{ secrets.AZURE_CREDENTIALS }}
+
       - name: Build, tag, and push docker image to Amazon ECR
         env:
           REGISTRY: ${{ steps.login-ecr.outputs.registry }}
