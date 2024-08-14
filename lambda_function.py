@@ -75,11 +75,15 @@ def handler(event, context):
         # # print(credentials)
         # with open('azure_credentials.json') as f:
         #     credentials = json.load(f)
-        credentials = get_parameter()
+        # credentials = get_parameter()
+        azure_credentials = os.getenv('AZURE_CREDENTIALS')
+        azure_credentials = json.loads(azure_credentials)
+    
+   
 
-        TENANT_ID = credentials['tenantId']
-        CLIENT_ID = credentials['clientId']
-        CLIENT_SECRET = credentials['clientSecret']
+        TENANT_ID = azure_credentials['tenantId']
+        CLIENT_ID = azure_credentials['clientId']
+        CLIENT_SECRET = azure_credentials['clientSecret']
             
 
         print("tenant id ",TENANT_ID)
