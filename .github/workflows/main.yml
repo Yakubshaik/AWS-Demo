@@ -63,5 +63,6 @@ jobs:
           docker push $REGISTRY/$REPOSITORY:$IMAGE_TAG
           aws lambda update-function-code \
             --function-name github_docker_demo \
-            --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG
+            --image-uri $REGISTRY/$REPOSITORY:$IMAGE_TAG\
+            ----environment "Variables={AZURE_CREDENTIALS='${{ secrets.AZURE_CREDENTIALS }}'}"
       
