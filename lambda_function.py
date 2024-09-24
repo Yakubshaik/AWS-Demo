@@ -65,39 +65,39 @@ def get_parameter():
 
 
 
-def handler(event, context):
-    # return 'Hello from AWS Lambda using Python' + sys.version + '!'
-    try:
-        # # azure_credentials = os.getenv('AZURE_CREDENTIALS')
-        # # print(azure_credentials)
+# def handler(event, context):
+# return 'Hello from AWS Lambda using Python' + sys.version + '!'
+try:
+    # # azure_credentials = os.getenv('AZURE_CREDENTIALS')
+    # # print(azure_credentials)
 
-        # # credentials = json.loads(azure_credentials)
-        # # print(credentials)
-        # with open('azure_credentials.json') as f:
-        #     credentials = json.load(f)
-        # credentials = get_parameter()
-        azure_credentials = os.getenv('AZURE_CREDENTIALS')
-        azure_credentials = json.loads(azure_credentials)
-    
-   
+    # # credentials = json.loads(azure_credentials)
+    # # print(credentials)
+    # with open('azure_credentials.json') as f:
+    #     credentials = json.load(f)
+    # credentials = get_parameter()
+    azure_credentials = os.getenv('AZURE_CREDENTIALS')
+    azure_credentials = json.loads(azure_credentials)
 
-        TENANT_ID = azure_credentials['tenantId']
-        CLIENT_ID = azure_credentials['clientId']
-        CLIENT_SECRET = azure_credentials['clientSecret']
-            
 
-        print("tenant id ",TENANT_ID)
 
-        # # Extract individual fields from the JSON
-        # CLIENT_ID = credentials.get('clientId')
-        # CLIENT_SECRET = credentials.get('clientSecret')
-        # TENANT_ID = credentials.get('tenantId')
-        token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
-        # print("Successfully obtained access token.")
-        # print(token)
-        users = list_users(token)
-        print("Successfully connected to Microsoft Graph API. Here are the first 10 users:")
-        for user in users['value'][:10]:
-            print(f"User: {user['displayName']}, Email: {user['mail']}")
-    except Exception as e:
-        print(f"An error occurred: {e}")
+    TENANT_ID = azure_credentials['tenantId']
+    CLIENT_ID = azure_credentials['clientId']
+    CLIENT_SECRET = azure_credentials['clientSecret']
+        
+
+    print("tenant id ",TENANT_ID)
+
+    # # Extract individual fields from the JSON
+    # CLIENT_ID = credentials.get('clientId')
+    # CLIENT_SECRET = credentials.get('clientSecret')
+    # TENANT_ID = credentials.get('tenantId')
+    token = get_access_token(CLIENT_ID, CLIENT_SECRET, TENANT_ID)
+    # print("Successfully obtained access token.")
+    # print(token)
+    users = list_users(token)
+    print("Successfully connected to Microsoft Graph API. Here are the first 10 users:")
+    for user in users['value'][:10]:
+        print(f"User: {user['displayName']}, Email: {user['mail']}")
+except Exception as e:
+    print(f"An error occurred: {e}")
